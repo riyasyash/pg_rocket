@@ -1,0 +1,82 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: pg_rocket
+    binary: pg_rocket
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X github.com/riyasyash/pg_rocket/cmd.Version={{.Version}}
+
+archives:
+  - id: default
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+    files:
+      - LICENSE
+      - README.md
+      - CONTRIBUTING.md
+
+checksum:
+  name_template: 'checksums.txt'
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+      - 'typo'
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+      order: 0
+    - title: Bug Fixes
+      regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+      order: 1
+    - title: Others
+      order: 999
+
+release:
+  github:
+    owner: riyasyash
+    name: pg_rocket
+  draft: false
+  prerelease: auto
+  mode: append
+  header: |
+    ## pg_rocket {{.Tag}}
+    
+    Extract referentially complete data subsets from PostgreSQL by traversing foreign key relationships.
+    
+    ### Installation
+    
+    Download the binary for your platform below, or install with Go:
+    ```bash
+    go install github.com/riyasyash/pg_rocket@{{.Tag}}
+    ```
+  footer: |
+    **Full Changelog**: https://github.com/riyasyash/pg_rocket/compare/{{.PreviousTag}}...{{.Tag}}
+    
+    ---
+    
+    **Built with Go and [pgx](https://github.com/jackc/pgx)** | Released by [GoReleaser](https://goreleaser.com)

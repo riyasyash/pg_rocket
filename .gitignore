@@ -1,0 +1,39 @@
+# Binaries
+pg_rocket
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test artifacts
+test/fixtures/*.sql
+test/fixtures/*.json
+
+# Go build artifacts
+*.test
+*.out
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+*.sql
+# Added by goreleaser init:
+dist/
