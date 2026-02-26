@@ -31,6 +31,17 @@
 
 ## Installation
 
+### Homebrew (macOS/Linux)
+
+```bash
+brew tap riyasyash/tap
+brew install pg_rocket
+```
+
+### From Binary
+
+Download the latest release for your platform from [GitHub Releases](https://github.com/riyasyash/pg_rocket/releases).
+
 ### From Source
 
 ```bash
@@ -48,7 +59,7 @@ go install github.com/riyasyash/pg_rocket@latest
 
 ### Requirements
 
-- Go 1.21 or later
+- Go 1.21 or later (if building from source)
 - PostgreSQL 12+ (source database)
 
 ## Quick Start
