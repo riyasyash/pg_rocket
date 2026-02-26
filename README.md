@@ -34,7 +34,7 @@
 ### Homebrew (macOS/Linux)
 
 ```bash
-brew tap riyasyash/tap
+brew tap riyasyash/tools
 brew install pg_rocket
 ```
 
